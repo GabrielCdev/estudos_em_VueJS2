@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<!-- Template < Trecho de HTML controlado pela instância (script) -->
+<div id="app">
+  <!-- O que será interpretado {{ aqui dentro }} precisa ser resolvido para uma string (numérico acaba sendo convertido para string também) -->
+  <p>{{ titulo }}</p>
+  <p>{{ saudacao() }}</p>
+</div>
+
+<script>
+  new Vue({
+    el: "#app", // Elemento que a instância irá controlar (div: id)
+    // Manipulação do DOM
+    data: {
+      titulo: 'Usando VueJS!'
+    },
+    // Vue cria acessos diretos quando você trabalha dentro do template
+    methods: {
+      // Não é possível colocar o nome dessa função de titulo pois já existe um dado usando esse mesmo nome e dá conflito
+      saudacao: function () {
+        console.log(this) // This, nesse contexto, apresenta a instância do Vue
+        return this.titulo
+      }
+    }
+  })
+</script>

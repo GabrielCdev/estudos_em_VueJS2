@@ -1,0 +1,47 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <button v-on:click="aumentar">Aumentar</button>
+  <button v-on:click="contador2++">Aumentar 2</button>
+  <button v-on:click="diminuir">Diminuir</button>
+  <p>Contador: {{ contador }} | {{ contador2 }}</p>
+  <!-- <p>Resultado: {{ resultado() }}</p> -->
+  <!-- Quando está dentro de computed não precisa chamar como método -->
+  <p>Resultado: {{ resultado }}</p>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      contador: 0,
+      // resultado: '',
+      contador2: 0,
+    },
+    computed: { // Propriedades computadas são síncronas
+      // O aumentar2 não chama a propriedade computada
+      // O Vue.js entende que dentro desse método computado o valor que foi alterado não gera nenhum impacto na propriedade computada
+      // Então, é mantido um cache (não precisando chamar de novo a função)
+      resultado() {
+        console.log('Metodo "computed resultado" chamado...')
+        return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5'
+      }
+    },
+    methods: {
+      aumentar() {
+        this.contador++
+        // this.resultado = this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5'
+      },
+      diminuir() {
+        this.contador--
+        // this.resultado = this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5'
+      },
+      // resultado() {
+      //   // Sem o computed esse método é chamado tanto no aumentar quanto no aumentar2
+      //   console.log('Metodo "resultado" chamado...');
+      //   return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5'
+
+      // }
+    }
+  })
+</script>
